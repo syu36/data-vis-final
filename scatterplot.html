@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Board Games Creation</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <style>
+        .dot {
+            fill: cornflowerblue;
+        }
+
+        /*
+            styles for the axes
+         */
+        .axis text {
+            font-family: "Trebuchet MS", sans-serif;
+            font-size: 12px;
+        }
+
+        .grid {
+            color: lightgray;
+        }
+
+        .label {
+            font-size: 24px;
+            font-family: "Trebuchet MS", sans-serif;
+            text-anchor: middle;
+            alignment-baseline: middle;
+        }
+
+        .title {
+            font-size: 28px;
+            font-family: "Trebuchet MS", sans-serif;
+            text-anchor: middle;
+            alignment-baseline: middle;
+        }
+    </style>
+</head>
+<body>
+<script>
+    let canvasWidth = 1200;
+    let canvasHeight = 800;
+    let xMargin = 100;
+    let yMargin = 100;
+    let width = canvasWidth - xMargin;
+    let height = canvasHeight - yMargin;
+    let dotSize = 1;
+
+    // set up svg
+    let svg = d3.select("body")
+        .append("svg")
+        .attr("height", height)
+        .attr("width", width);
+
+    // background
+    svg.append("rect")
+        .attr("fill", "rgb(240, 240, 240)")
+        .attr("width", "100%")
+        .attr("height", "100%");
+
+    // title
+    svg.append("text")
+        .attr("class", "title")
+        .attr("transform", "translate(" + (width / 2) + ", " + (yMargin / 2) + ")")
+        .text("Rating vs Complexity of Board Games");
+
+    // x label
+    svg.append("text")
+        .attr("class", "label")
+        .attr("transform", "translate(" + (width / 2) + ", " + (height - yMargin / 2) + ")")
+        .text("Complexity Average");
+
+    // y label
+    svg.append("text")
+        .attr("class", "label")
+        .attr("transform", "translate(" + (xMargin / 2) + ", " + (height / 2) + ") rotate(270)")
+        .text("Rating Average")
+
+    let xScale = d3.scaleLinear().range([0, width - xMargin * 2]);
+    let yScale = d3.scaleLinear().range([height - yMargin * 2, 0]);
+
+    // container for grid, so the grid is drawn first
+    let grid_container = svg.append("g");
+
+    // container for all of the points
+    let container = svg.append("g")
+        .attr("transform", "translate(" + xMargin + ", " + yMargin + ")");
+
+    let parseDate = d3.timeParse("%Y");
+
+    // make sure we can read numbers properly
+    let rowConverter = function(d) {
+        return {
+            rating: +d["Rating Average"],
+            complexity: +d["Complexity Average"]
+        };
+    };
+
+    d3.csv("BGG_Data_Set.csv", rowConverter).then(data => {
+        // remove outliers with game complexity at 0- complexity scale from 1 to 5
+        data = data.filter(d => d.complexity >= 1)
+
+        xScale.domain(d3.extent(data, function(d) {
+            return d.complexity;
+        }));
+
+        yScale.domain(d3.extent(data, function(d) {
+            return d.rating;
+        }));
+
+        // draw points
+        container.selectAll("dot")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("class", "dot")
+            .attr("cx", function(d) {
+                return xScale(d.complexity);
+            })
+            .attr("cy", function(d) {
+                return yScale(d.rating);
+            })
+            .attr("r", dotSize);
+
+        // draw vertical grid lines
+        grid_container.append("g")
+            .attr("class", "grid")
+            .attr("transform", "translate("+xMargin+", "+(height-yMargin)+")")
+            .call(d3.axisTop(xScale)
+                .tickSize(height - yMargin * 2)
+                .tickFormat("")
+                .tickSizeOuter(0));
+
+        // draw horizontal grid lines
+        grid_container.append("g")
+            .attr("class", "grid")
+            .attr("transform", "translate(" + xMargin + ", " + yMargin + ")")
+            .call(d3.axisRight(yScale)
+                .tickSize(width - xMargin * 2)
+                .tickFormat("")
+                .tickSizeOuter(0));
+
+        // draw x axis
+        svg.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(" + xMargin + ", " + (height - yMargin) + ")")
+            .call(d3.axisBottom(xScale).tickSizeOuter(0));
+
+        // draw y axis
+        svg.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(" + xMargin + ", " + yMargin + ")")
+            .call(d3.axisLeft(yScale).tickSizeOuter(0));
+    });
+</script>
+</body>
+</html>
