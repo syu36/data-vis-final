@@ -4,4 +4,7 @@ Board games have been around throughout history as a source of entertainment for
 Today, there are hundreds of thousands of board games. These visualizations will provide some insights into some
 of the top games, using data collected from one of the top board game listing/rating websites, Board Game Geek.
 
-[Alpha Release](docs/Alpha%20Release.pdf)
+[Alpha Release](docs/Alpha%20Release.pdf)  
+[Line Chart](linechart.html)  
+[Scatterplot](scatterplot.html)  
+[Radar Chart](radar.html)  
