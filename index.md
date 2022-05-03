@@ -11,8 +11,11 @@ of the top games, using data collected from one of the top board game listing/ra
 [Scatterplot](scatterplot.html)  
 [Radar Chart](radar.html)
 
-
 <style>
+div.linechart {
+  font-family: "Trebuchet MS", sans-serif;
+}
+
 .axis text {
     font-family: "Trebuchet MS", sans-serif;
     font-size: 12px;
@@ -37,6 +40,11 @@ of the top games, using data collected from one of the top board game listing/ra
 }
 </style>
 <script src="https://d3js.org/d3.v7.min.js"></script>
+
+<div id="linechart"></div>
+<div id="scatterplot"></div>
+<div id="radarchart"></div>
+
 <script>
     let canvasWidth = 1200;
     let canvasHeight = 800;
@@ -45,7 +53,7 @@ of the top games, using data collected from one of the top board game listing/ra
     let width = canvasWidth - xMargin;
     let height = canvasHeight - yMargin;
 
-    let svg = d3.select("#linechart")
+    let svg = d3.select("div#linechart")
         .append("svg")
         .attr("height", height)
         .attr("width", width);
@@ -137,6 +145,6 @@ of the top games, using data collected from one of the top board game listing/ra
     });
 </script>
 
-<div id="linechart"></div>
+
 
 This is the end of the page.
