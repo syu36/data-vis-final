@@ -6,16 +6,10 @@ let width = canvasWidth - xMargin;
 let height = canvasHeight - yMargin;
 
 // set up svg
-let svg = d3.select("body")
+let svg = d3.select("div#linechart")
     .append("svg")
     .attr("height", height)
     .attr("width", width);
-
-// background
-svg.append("rect")
-    .attr("fill", "rgb(240, 240, 240)")
-    .attr("width", "100%")
-    .attr("height", "100%");
 
 // title
 svg.append("text")
