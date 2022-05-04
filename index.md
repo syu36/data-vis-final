@@ -45,100 +45,177 @@ div.linechart {
 <div id="scatterplot"></div>
 <div id="radarchart"></div>
 
-<script>
-    let canvasWidth = 1200;
-    let canvasHeight = 800;
-    let xMargin = 100;
-    let yMargin = 100;
-    let width = canvasWidth - xMargin;
-    let height = canvasHeight - yMargin;
+[//]: # (<script>)
 
-    let svg = d3.select("div#linechart")
-        .append("svg")
-        .attr("height", height)
-        .attr("width", width);
+[//]: # (    let canvasWidth = 1200;)
 
-    svg.append("text")
-        .attr("class", "title")
-        .attr("transform", "translate(" + (width / 2) + ", " + (yMargin / 2) + ")")
-        .text("Board Games Published Over Time");
+[//]: # (    let canvasHeight = 800;)
 
-    svg.append("text")
-        .attr("class", "label")
-        .attr("transform", "translate(" + (width / 2) + ", " + (height - yMargin / 2) + ")")
-        .text("Year");
+[//]: # (    let xMargin = 100;)
 
-    svg.append("text")
-        .attr("class", "label")
-        .attr("transform", "translate(" + (xMargin / 2) + ", " + (height / 2) + ") rotate(270)")
-        .text("# of Board Games");
+[//]: # (    let yMargin = 100;)
 
-    let xScale = d3.scaleTime().range([0, width - xMargin * 2]);
-    let yScale = d3.scaleLinear().range([height - yMargin * 2, 0]);
+[//]: # (    let width = canvasWidth - xMargin;)
 
-    let grid_container = svg.append("g");
+[//]: # (    let height = canvasHeight - yMargin;)
 
-    let container = svg.append("g")
-        .attr("transform", "translate(" + xMargin + ", " + yMargin + ")");
+[//]: # ()
+[//]: # (    let svg = d3.select&#40;"div#linechart"&#41;)
 
-    let parseDate = d3.timeParse("%Y");
+[//]: # (        .append&#40;"svg"&#41;)
 
-    let rowConverter = function(d) {
-        return {
-            year: parseDate(d["Year Published"]),
-        };
-    };
+[//]: # (        .attr&#40;"height", height&#41;)
 
-    d3.csv("BGG_Data_Set.csv", rowConverter).then(data => {
-        data = data.filter(data => data.year !== null);
-        let counts = d3.rollups(data, v => d3.count(v, d => d.year), d => d.year);
-        counts = counts.sort((a, b) => a[0] - b[0]);
+[//]: # (        .attr&#40;"width", width&#41;;)
 
-        counts.shift();
+[//]: # ()
+[//]: # (    svg.append&#40;"text"&#41;)
 
-        counts.pop();
+[//]: # (        .attr&#40;"class", "title"&#41;)
 
-        xScale.domain(d3.extent(counts, function(d) {
-            return d[0];
-        }));
+[//]: # (        .attr&#40;"transform", "translate&#40;" + &#40;width / 2&#41; + ", " + &#40;yMargin / 2&#41; + "&#41;"&#41;)
 
-        yScale.domain([0, d3.max(counts, function(d) {
-            return d[1];
-        })]);
+[//]: # (        .text&#40;"Board Games Published Over Time"&#41;;)
 
-        container.append("path")
-            .datum(counts)
-            .attr("fill", "none")
-            .attr("stroke", "cornflowerblue")
-            .attr("stroke-width", 3)
-            .attr("d", d3.line()
-                .x(function(d) {
-                    return xScale(d[0]);
-                })
-                .y(function(d) {
-                    return yScale(d[1]);
-                }));
+[//]: # ()
+[//]: # (    svg.append&#40;"text"&#41;)
 
-        grid_container.append("g")
-            .attr("class", "grid")
-            .attr("transform", "translate(" + xMargin + ", " + yMargin + ")")
-            .call(d3.axisRight(yScale)
-                .tickSize(width - xMargin * 2)
-                .tickFormat("")
-                .tickSizeOuter(0));
+[//]: # (        .attr&#40;"class", "label"&#41;)
 
-        svg.append("g")
-            .attr("class", "axis")
-            .attr("transform", "translate(" + xMargin + ", " + (height - yMargin) + ")")
-            .call(d3.axisBottom(xScale).tickSizeOuter(0)
-                .ticks(d3.timeYear.every(100)));
+[//]: # (        .attr&#40;"transform", "translate&#40;" + &#40;width / 2&#41; + ", " + &#40;height - yMargin / 2&#41; + "&#41;"&#41;)
 
-        svg.append("g")
-            .attr("class", "axis")
-            .attr("transform", "translate(" + xMargin + ", " + yMargin + ")")
-            .call(d3.axisLeft(yScale).tickSizeOuter(0));
-    });
-</script>
+[//]: # (        .text&#40;"Year"&#41;;)
+
+[//]: # ()
+[//]: # (    svg.append&#40;"text"&#41;)
+
+[//]: # (        .attr&#40;"class", "label"&#41;)
+
+[//]: # (        .attr&#40;"transform", "translate&#40;" + &#40;xMargin / 2&#41; + ", " + &#40;height / 2&#41; + "&#41; rotate&#40;270&#41;"&#41;)
+
+[//]: # (        .text&#40;"# of Board Games"&#41;;)
+
+[//]: # ()
+[//]: # (    let xScale = d3.scaleTime&#40;&#41;.range&#40;[0, width - xMargin * 2]&#41;;)
+
+[//]: # (    let yScale = d3.scaleLinear&#40;&#41;.range&#40;[height - yMargin * 2, 0]&#41;;)
+
+[//]: # ()
+[//]: # (    let grid_container = svg.append&#40;"g"&#41;;)
+
+[//]: # ()
+[//]: # (    let container = svg.append&#40;"g"&#41;)
+
+[//]: # (        .attr&#40;"transform", "translate&#40;" + xMargin + ", " + yMargin + "&#41;"&#41;;)
+
+[//]: # ()
+[//]: # (    let parseDate = d3.timeParse&#40;"%Y"&#41;;)
+
+[//]: # ()
+[//]: # (    let rowConverter = function&#40;d&#41; {)
+
+[//]: # (        return {)
+
+[//]: # (            year: parseDate&#40;d["Year Published"]&#41;,)
+
+[//]: # (        };)
+
+[//]: # (    };)
+
+[//]: # ()
+[//]: # (    d3.csv&#40;"BGG_Data_Set.csv", rowConverter&#41;.then&#40;data => {)
+
+[//]: # (        data = data.filter&#40;data => data.year !== null&#41;;)
+
+[//]: # (        let counts = d3.rollups&#40;data, v => d3.count&#40;v, d => d.year&#41;, d => d.year&#41;;)
+
+[//]: # (        counts = counts.sort&#40;&#40;a, b&#41; => a[0] - b[0]&#41;;)
+
+[//]: # ()
+[//]: # (        counts.shift&#40;&#41;;)
+
+[//]: # ()
+[//]: # (        counts.pop&#40;&#41;;)
+
+[//]: # ()
+[//]: # (        xScale.domain&#40;d3.extent&#40;counts, function&#40;d&#41; {)
+
+[//]: # (            return d[0];)
+
+[//]: # (        }&#41;&#41;;)
+
+[//]: # ()
+[//]: # (        yScale.domain&#40;[0, d3.max&#40;counts, function&#40;d&#41; {)
+
+[//]: # (            return d[1];)
+
+[//]: # (        }&#41;]&#41;;)
+
+[//]: # ()
+[//]: # (        container.append&#40;"path"&#41;)
+
+[//]: # (            .datum&#40;counts&#41;)
+
+[//]: # (            .attr&#40;"fill", "none"&#41;)
+
+[//]: # (            .attr&#40;"stroke", "cornflowerblue"&#41;)
+
+[//]: # (            .attr&#40;"stroke-width", 3&#41;)
+
+[//]: # (            .attr&#40;"d", d3.line&#40;&#41;)
+
+[//]: # (                .x&#40;function&#40;d&#41; {)
+
+[//]: # (                    return xScale&#40;d[0]&#41;;)
+
+[//]: # (                }&#41;)
+
+[//]: # (                .y&#40;function&#40;d&#41; {)
+
+[//]: # (                    return yScale&#40;d[1]&#41;;)
+
+[//]: # (                }&#41;&#41;;)
+
+[//]: # ()
+[//]: # (        grid_container.append&#40;"g"&#41;)
+
+[//]: # (            .attr&#40;"class", "grid"&#41;)
+
+[//]: # (            .attr&#40;"transform", "translate&#40;" + xMargin + ", " + yMargin + "&#41;"&#41;)
+
+[//]: # (            .call&#40;d3.axisRight&#40;yScale&#41;)
+
+[//]: # (                .tickSize&#40;width - xMargin * 2&#41;)
+
+[//]: # (                .tickFormat&#40;""&#41;)
+
+[//]: # (                .tickSizeOuter&#40;0&#41;&#41;;)
+
+[//]: # ()
+[//]: # (        svg.append&#40;"g"&#41;)
+
+[//]: # (            .attr&#40;"class", "axis"&#41;)
+
+[//]: # (            .attr&#40;"transform", "translate&#40;" + xMargin + ", " + &#40;height - yMargin&#41; + "&#41;"&#41;)
+
+[//]: # (            .call&#40;d3.axisBottom&#40;xScale&#41;.tickSizeOuter&#40;0&#41;)
+
+[//]: # (                .ticks&#40;d3.timeYear.every&#40;100&#41;&#41;&#41;;)
+
+[//]: # ()
+[//]: # (        svg.append&#40;"g"&#41;)
+
+[//]: # (            .attr&#40;"class", "axis"&#41;)
+
+[//]: # (            .attr&#40;"transform", "translate&#40;" + xMargin + ", " + yMargin + "&#41;"&#41;)
+
+[//]: # (            .call&#40;d3.axisLeft&#40;yScale&#41;.tickSizeOuter&#40;0&#41;&#41;;)
+
+[//]: # (    }&#41;;)
+
+[//]: # (</script>)
+
+<script src="linechart.js"></script>
 
 <script>
     let width = 800;
