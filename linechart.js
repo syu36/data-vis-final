@@ -6,7 +6,7 @@ let width = canvasWidth - xMargin;
 let height = canvasHeight - yMargin;
 
 // set up svg
-let svg = d3.select("#linechart")
+let svg = d3.select("body").select("div#linechart")
     .append("svg")
     .attr("height", height)
     .attr("width", width);
