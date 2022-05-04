@@ -45,5 +45,4 @@ div.linechart {
 <div id="scatterplot"></div>
 <div id="radarchart"></div>
 
-<script defer src="linechart.js"></script>
 This is the end of the page.
