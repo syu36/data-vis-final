@@ -48,7 +48,7 @@ of the top games, using data collected from one of the top board game listing/ra
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js"></script>
 
-Board games have been around and enjoyed for millenia.
+Board games date back a very long time. 
 The very first board game was quite possibly a dice game from around 5000BC, found at the Başur Höyük burial mound in southeast Turkey.
 In Ancient Egypt, Senet (~3000BC) was popular amongst pharaohs.
 Other games in ancient times include, but are not limited to Backgammon (~2000BC) from Mesopotamia, Go (~2000BC) from China,
@@ -77,10 +77,10 @@ a single mechanic group. Hover over a point to see the name of the game as well 
 <select id="selectButton"></select>
 <hr>
 
-**Sources for facts**
-[1](https://en.wikipedia.org/wiki/Board_game)  
-[2](https://boardgamesland.com/the-complete-history-of-board-games/)  
-[3](https://diceygoblin.com/the-full-history-of-board-games/)  
+**Sources for facts**  
+[https://en.wikipedia.org/wiki/Board_game](https://en.wikipedia.org/wiki/Board_game)  
+[https://boardgamesland.com/the-complete-history-of-board-games/](https://boardgamesland.com/the-complete-history-of-board-games/)  
+[https://diceygoblin.com/the-full-history-of-board-games/](https://diceygoblin.com/the-full-history-of-board-games/)  
 
 <script>
 let canvasWidth1 = 1200;
