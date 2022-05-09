@@ -39,6 +39,12 @@
         .attr("width", width)
         .attr("height", height);
 
+    // background
+    svg.append("rect")
+        .attr("fill", "rgb(240, 240, 240)")
+        .attr("width", "100%")
+        .attr("height", "100%");
+
     svg.append("text")
         .attr("class", "title")
         .attr("transform", "translate(" + (width / 2) + ", " + yMargin / 2 + ")")
