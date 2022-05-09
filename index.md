@@ -53,7 +53,7 @@ of the top games, using data collected from one of the top board game listing/ra
 <div id="linechart"></div>
 
 <script>
-let canvasWidth1 = 1000;
+let canvasWidth1 = 1200;
 let canvasHeight1 = 800;
 let xMargin = 100;
 let yMargin = 100;
@@ -97,7 +97,7 @@ svg1.append("defs").append("clipPath")
     .attr("width", width1 - xMargin * 2)
     .attr("height", height1 - yMargin);
 
-let container1 = svg.append("g")
+let container1 = svg1.append("g")
     .attr("clip-path", "url(#clip)")
     .attr("transform", "translate(" + 0 + ", " + yMargin + ")");
 
