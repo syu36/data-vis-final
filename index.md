@@ -59,11 +59,11 @@ Hover over a point to learn something!
 <div id="linechart"></div>
 <hr>
 
-Board games fall under many domains, but the most common would have to be strategy and family games.
+Board games can have a domain or even multiple, but the most common would have to be strategy and family games.
 One of the available functions of being a member of the BoardGameGeek community is to be able to report what games you own.
 Below is a chart showing the kind of board games people own, grouped by the minimum recommended age of those games.
 Makes sense that most family games recommend children of ages 5+ for their games, and it seems interesting
-that many strategy games and thematic games that people own tend to be for ages 12 and up.
+that many strategy games and thematic games that people own tend to be for ages 12 and up. 
 
 <div id="radar"></div>
 <hr>
