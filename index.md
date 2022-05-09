@@ -544,8 +544,8 @@ d3.csv("bgg_data_mechanics.csv", rowConverter3).then(data => {
 
 
     function hover(event, elem) {
-        tooltip.style("left", event.x + 5 + "px")
-            .style("top", event.y - 30 + "px")
+        tooltip.style("left", event.pageX + 10 + "px")
+            .style("top", event.pageY - 30 + "px")
             .style("opacity", 1)
             .html(elem.name + "<br>Published " + elem.year);
 
@@ -617,5 +617,5 @@ d3.csv("bgg_data_mechanics.csv", rowConverter3).then(data => {
     })
 });
 </script>
-
+<select id="selectButton"></select>
 This is the end of the page.
