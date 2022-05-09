@@ -416,6 +416,10 @@ d3.csv("bgg_data_domains.csv", rowConverter2).then(data => {
 })
 </script>
 <script>
+let canvasWidth = 1200;
+let canvasHeight = 800;
+let width = canvasWidth - xMargin;
+let height = canvasHeight - yMargin;
 let dotSize = 2.5;
 
 let svg3 = d3.select("div#scatter")
