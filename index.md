@@ -1,6 +1,6 @@
-##### Board games have been around throughout history as a source of entertainment for friends and family.
-##### Today, there are hundreds of thousands of board games. These visualizations will provide some insights into some
-##### of the top games, using data collected from one of the top board game listing/rating websites, BoardGameGeek.
+**Board games have been around throughout history as a source of entertainment for friends and family. 
+Today, there are hundreds of thousands of board games. These visualizations will provide some insights into some 
+of the top games, using data collected from one of the top board game listing/rating websites, BoardGameGeek.**
 <hr>
 
 <style>
@@ -48,10 +48,6 @@
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js"></script>
 
-<div id="linechart"></div>
-<div id="radar"></div>
-<div id="scatter"></div>
-
 Board games have been around and enjoyed for millenia.
 The very first board game was quite possibly a dice game from around 5000BC, found at the Başur Höyük burial mound in southeast Turkey.
 In Ancient Egypt, Senet (~3000BC) was popular amongst pharaohs.
@@ -59,6 +55,27 @@ Other games in ancient times include, but are not limited to Backgammon (~2000BC
 and Hounds and Jackals (~2000BC), also from Ancient Egypt.
 This chart shows a history of board game publication counts by year, and has some interesting facts along the timeline.
 Hover over a point to learn something!
+
+<div id="linechart"></div>
+<hr>
+
+Board games fall under many domains, but the most common would have to be strategy and family games.
+One of the available functions of being a member of the BoardGameGeek community is to be able to report what games you own.
+Below is a chart showing the kind of board games people own, grouped by the minimum recommended age of those games.
+Makes sense that most family games recommend children of ages 5+ for their games, and it seems interesting
+that many strategy games and thematic games that people own tend to be for ages 12 and up.
+
+<div id="radar"></div>
+<hr>
+
+Is the difficulty of learning and playing a board game linked in any way to the overall rating of a board game?
+This chart seems to show a very slight trend in which complexity might have a positive effect on rating, but it's nothing conclusive.
+Still, it's interesting to be able to filter through the mechanics of the games and check if there might be some correlation within
+a single mechanic group. Hover over a point to see the name of the game as well as the year it was published.
+
+<div id="scatter"></div>
+<select id="selectButton"></select>
+<hr>
 
 <script>
 let canvasWidth1 = 1200;
@@ -269,14 +286,6 @@ counts.forEach(count => {
         .on("mouseout", mouseout)
 });
 </script>
-<hr>
-
-Board games fall under many domains, but the most common would have to be strategy and family games.
-One of the available functions of being a member of the BoardGameGeek community is to be able to report what games you own. 
-Below is a chart showing the kind of board games people own, grouped by the minimum recommended age of those games. 
-Makes sense that most family games recommend children of ages 5+ for their games, and it seems interesting 
-that many strategy games and thematic games that people own tend to be for ages 12 and up.
-
 <script>
 let canvasWidth2 = 1200;
 let canvasHeight2 = 1200;
@@ -428,13 +437,6 @@ d3.csv("bgg_data_domains.csv", rowConverter2).then(data => {
         .call(legendOrdinal);
 })
 </script>
-<hr>
-
-Is the difficulty of learning and playing a board game linked in any way to the overall rating of a board game? 
-This chart seems to show a very slight trend in which complexity might have a positive effect on rating, but it's nothing conclusive. 
-Still, it's interesting to be able to filter through the mechanics of the games and check if there might be some correlation within 
-a single mechanic group. Hover over a point to see the name of the game as well as the year it was published.
-
 <script>
 let canvasWidth = 1200;
 let canvasHeight = 800;
@@ -637,5 +639,3 @@ d3.csv("bgg_data_mechanics.csv", rowConverter3).then(data => {
     })
 });
 </script>
-<select id="selectButton"></select>
-<hr>
