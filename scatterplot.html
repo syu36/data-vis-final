@@ -45,7 +45,7 @@
     let yMargin = 100;
     let width = canvasWidth - xMargin;
     let height = canvasHeight - yMargin;
-    let dotSize = 2;
+    let dotSize = 2.5;
 
     // set up svg
     let svg = d3.select("body")
@@ -93,6 +93,7 @@
     let rowConverter = function(d) {
         return {
             name: d["Name"],
+            year: d["Year Published"],
             rating: +d["Rating Average"],
             complexity: +d["Complexity Average"],
             mechanics: d["Mechanics"].trim(),
@@ -121,6 +122,37 @@
             return d.rating;
         }));
 
+        // draw vertical grid lines
+        grid_container.append("g")
+            .attr("class", "grid")
+            .attr("transform", "translate(" + xMargin + ", " + (height - yMargin) + ")")
+            .call(d3.axisTop(xScale)
+                .tickSize(height - yMargin * 2)
+                .tickFormat("")
+                .tickSizeOuter(0));
+
+        // draw horizontal grid lines
+        grid_container.append("g")
+            .attr("class", "grid")
+            .attr("transform", "translate(" + xMargin + ", " + yMargin + ")")
+            .call(d3.axisRight(yScale)
+                .tickSize(width - xMargin * 2)
+                .tickFormat("")
+                .tickSizeOuter(0));
+
+
+        // draw x axis
+        svg.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(" + xMargin + ", " + (height - yMargin) + ")")
+            .call(d3.axisBottom(xScale).tickSizeOuter(0));
+
+        // draw y axis
+        svg.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(" + xMargin + ", " + yMargin + ")")
+            .call(d3.axisLeft(yScale).tickSizeOuter(0));
+
         // get all of the mechanics from the data to list
         let options = data.map(d => d.mechanics)
             .filter(option => option !== "");
@@ -148,6 +180,39 @@
                 return d;
             })
 
+        // reference: https://d3-graph-gallery.com/graph/interactivity_tooltip.html#template
+        let tooltip = d3.select("body")
+            .append("div")
+            .style("opacity", 0)
+            .attr("id", "tooltip")
+            .style("background-color", "lightblue")
+            .style("border-radius", "7px")
+            .style("border", "solid")
+            .style("border-color", "darkblue")
+            .style("border-width", "2px")
+            .style("padding", "5px")
+            .style("position", "absolute")
+
+
+        function hover(event, elem) {
+            tooltip.style("left", event.x + 5 + "px")
+                .style("top", event.y - 30 + "px")
+                .style("opacity", 1)
+                .html(elem.name + "<br>Published " + elem.year)
+
+            d3.select(this)
+                .attr("r", 3)
+        }
+
+        function mouseout() {
+            tooltip.style("opacity", 0)
+                .style("top", 0)
+                .style("left", 0)
+
+            d3.select(this)
+                .attr("r", dotSize)
+        }
+
 
         let circles = container.selectAll("circle");
 
@@ -162,6 +227,8 @@
                 circles = circles
                     .data(dataFilter)
                     .join("circle")
+                    .on("mouseover", hover)
+                    .on("mouseout", mouseout);
 
                 circles
                     .transition()
@@ -177,7 +244,9 @@
 
             } else {
                 circles = circles.data(initialData)
-                    .join('circle');
+                    .join('circle')
+                    .on("mouseover", hover)
+                    .on("mouseout", mouseout);
 
                 circles
                     .transition()
@@ -189,47 +258,16 @@
                     .attr("cy", function(d) {
                         return yScale(d.rating);
                     })
-                    .attr("r", dotSize);
+                    .attr("r", dotSize)
             }
         }
 
         update("Game Mechanic")
 
-
         d3.select("#selectButton").on("change", function(d) {
             let selectedOption = d3.select(this).property("value")
             update(selectedOption)
         })
-
-        // draw vertical grid lines
-        grid_container.append("g")
-            .attr("class", "grid")
-            .attr("transform", "translate(" + xMargin + ", " + (height - yMargin) + ")")
-            .call(d3.axisTop(xScale)
-                .tickSize(height - yMargin * 2)
-                .tickFormat("")
-                .tickSizeOuter(0));
-
-        // draw horizontal grid lines
-        grid_container.append("g")
-            .attr("class", "grid")
-            .attr("transform", "translate(" + xMargin + ", " + yMargin + ")")
-            .call(d3.axisRight(yScale)
-                .tickSize(width - xMargin * 2)
-                .tickFormat("")
-                .tickSizeOuter(0));
-
-        // draw x axis
-        svg.append("g")
-            .attr("class", "axis")
-            .attr("transform", "translate(" + xMargin + ", " + (height - yMargin) + ")")
-            .call(d3.axisBottom(xScale).tickSizeOuter(0));
-
-        // draw y axis
-        svg.append("g")
-            .attr("class", "axis")
-            .attr("transform", "translate(" + xMargin + ", " + yMargin + ")")
-            .call(d3.axisLeft(yScale).tickSizeOuter(0));
     });
 </script>
 <!-- Initialize a select button -->
