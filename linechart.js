@@ -6,43 +6,43 @@ let width = canvasWidth - xMargin;
 let height = canvasHeight - yMargin;
 
 // set up svg
-let svg = d3.select("body")
+let svg1 = d3.select("body")
     .append("svg")
     .attr("height", height)
     .attr("width", width);
 
 // background
-svg.append("rect")
+svg1.append("rect")
     .attr("fill", "rgb(240, 240, 240)")
     .attr("width", "100%")
     .attr("height", "100%");
 
 // title
-svg.append("text")
+svg1.append("text")
     .attr("class", "title")
     .attr("transform", "translate(" + (width / 2) + ", " + (yMargin / 2) + ")")
     .text("Board Games Published Over Time");
 
 // x label
-svg.append("text")
+svg1.append("text")
     .attr("class", "label")
     .attr("transform", "translate(" + (width / 2) + ", " + (height - yMargin / 2) + ")")
     .text("Year");
 
 // y label
-svg.append("text")
+svg1.append("text")
     .attr("class", "label")
     .attr("transform", "translate(" + (xMargin / 2) + ", " + (height / 2) + ") rotate(270)")
     .text("# of Board Games")
 
-let xScale = d3.scaleTime().range([xMargin, width - xMargin]);
-let yScale = d3.scaleLinear().range([height - yMargin * 2, 0]);
+let xScale1 = d3.scaleTime().range([xMargin, width - xMargin]);
+let yScale1 = d3.scaleLinear().range([height - yMargin * 2, 0]);
 
 // container for grid, so the grid is drawn first
-let grid_container = svg.append("g");
+let grid_container1 = svg.append("g");
 
 // a zoom fix from: https://stackoverflow.com/questions/54828487/how-do-i-make-sure-the-zoom-doesnt-go-below-zero-and-avoid-the-zoomed-points-to
-svg.append("defs").append("clipPath")
+svg1.append("defs").append("clipPath")
     .attr("id", "clip")
     .append("rect")
     .attr("x", xMargin)
@@ -50,15 +50,15 @@ svg.append("defs").append("clipPath")
     .attr("height", height - yMargin)
 
 // container for all of the points
-let container = svg.append("g")
+let container1 = svg.append("g")
     .attr("clip-path", "url(#clip)")
     .attr("transform", "translate(" + 0 + ", " + yMargin + ")");
 
 
-let parseDate = d3.timeParse("%Y");
+let parseDate1 = d3.timeParse("%Y");
 
 // make sure we can read numbers properly
-let rowConverter = function(d) {
+let rowConverter1 = function(d) {
     return {
         year: parseDate(d["Year Published"]),
     };
@@ -66,7 +66,7 @@ let rowConverter = function(d) {
 
 let rowConverterFacts = function(d) {
     return {
-        year: parseDate(d["Year"]),
+        year: parseDate1(d["Year"]),
         fact: d["Fact"]
     }
 }
@@ -76,11 +76,11 @@ d3.csv("board_game_facts.csv", rowConverterFacts).then(data => {
     facts = data;
 });
 
-d3.csv("BGG_Data_Set.csv", rowConverter).then(data => {
+d3.csv("BGG_Data_Set.csv", rowConverter1).then(data => {
     data = data.filter(data => data.year !== null)
     // get averages
     let counts = d3.rollups(data, v => d3.count(v, d => d.year), d => d.year);
-    console.log(counts)
+
     // sort array by year (asc)
     counts = counts.sort((a, b) => a[0] - b[0]);
 
@@ -93,8 +93,6 @@ d3.csv("BGG_Data_Set.csv", rowConverter).then(data => {
             }
         })
     })
-
-    console.log(facts)
 
     // year 0 is an outlier
     counts.shift()
@@ -111,42 +109,42 @@ d3.csv("BGG_Data_Set.csv", rowConverter).then(data => {
     }) + 50]);
 
     // draw x axis
-    let x_axis = svg.append("g")
+    let x_axis = svg1.append("g")
         .attr("class", "axis")
         .attr("transform", "translate(" + 0 + ", " + (height - yMargin) + ")")
-        .call(d3.axisBottom(xScale).tickSizeOuter(0)
+        .call(d3.axisBottom(xScale1).tickSizeOuter(0)
             .ticks(d3.timeYear.every(100)));
 
     // draw horizontal grid lines
-    grid_container.append("g")
+    grid_container1.append("g")
         .attr("class", "grid")
         .attr("transform", "translate(" + xMargin + ", " + yMargin + ")")
-        .call(d3.axisRight(yScale)
+        .call(d3.axisRight(yScale1)
             .tickSize(width - xMargin * 2)
             .tickFormat("")
             .tickSizeOuter(0));
 
     // draw y axis
-    svg.append("g")
+    svg1.append("g")
         .attr("class", "axis")
         .attr("transform", "translate(" + xMargin + ", " + yMargin + ")")
-        .call(d3.axisLeft(yScale).tickSizeOuter(0));
+        .call(d3.axisLeft(yScale1).tickSizeOuter(0));
 
     let line = d3.line()
         .x(function(d) {
             // console.log(d[0])
-            return xScale(d[0]);
+            return xScale1(d[0]);
         })
         .y(function(d) {
-            return yScale(d[1]);
+            return yScale1(d[1]);
         });
 
 
     function zoomed(event) {
         // create new scale based off of zoom event using old x scale
-        let xz = event.transform.rescaleX(xScale);
+        let xz = event.transform.rescaleX(xScale1);
         // change scale of x axis
-        x_axis.call(d3.axisBottom(xScale).scale(xz).tickSizeOuter(0));
+        x_axis.call(d3.axisBottom(xScale1).scale(xz).tickSizeOuter(0));
         // update our line function to scale based on zoom
         line.x(function(d) {
             return xz(d[0]);
@@ -167,7 +165,7 @@ d3.csv("BGG_Data_Set.csv", rowConverter).then(data => {
         .translateExtent([[xMargin, -Infinity], [width - xMargin, Infinity]])
         .on("zoom", zoomed);
 
-    svg.call(zoom)
+    svg1.call(zoom)
         .transition()
         .duration(100)
         .call(zoom.scaleTo, 1);
@@ -206,7 +204,7 @@ d3.csv("BGG_Data_Set.csv", rowConverter).then(data => {
 
 
     // draw line. reference: https://www.d3-graph-gallery.com/graph/line_basic.html
-    container.append("path")
+    container1.append("path")
         .datum(counts)
         .attr("class", "line")
         .attr("fill", "none")
@@ -220,17 +218,17 @@ d3.csv("BGG_Data_Set.csv", rowConverter).then(data => {
     // sources: https://en.wikipedia.org/wiki/Board_game#History
     // https://boardgamesland.com/the-complete-history-of-board-games/
     // https://diceygoblin.com/the-full-history-of-board-games/
-    container.selectAll("circle")
+    container1.selectAll("circle")
         .data(facts)
         .enter()
         .append("circle")
         .attr("class", "points")
         .attr("fill", "darkblue")
         .attr("cx", function(d) {
-            return xScale(d.year);
+            return xScale1(d.year);
         })
         .attr("cy", function(d) {
-            return yScale(d.count);
+            return yScale1(d.count);
         })
         .attr("r", 4)
         .on("mouseover", hover)
