@@ -105,7 +105,7 @@ let parseDate1 = d3.timeParse("%Y");
 
 let rowConverter1 = function(d) {
     return {
-        year: parseDate(d["Year Published"]),
+        year: parseDate1(d["Year Published"]),
     };
 };
 
