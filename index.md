@@ -243,7 +243,9 @@ counts.forEach(count => {
         .style("border-color", "darkblue")
         .style("border-width", "2px")
         .style("padding", "5px")
-        .style("position", "absolute");
+        .style("position", "absolute")
+        .style("top", "0px")
+        .style("left", "0px");
 
     function hover(event, elem) {
         tooltip.style("left", event.pageX + 10 + "px")
@@ -567,7 +569,9 @@ d3.csv("bgg_data_mechanics.csv", rowConverter3).then(data => {
         .style("border-color", "darkblue")
         .style("border-width", "2px")
         .style("padding", "5px")
-        .style("position", "absolute");
+        .style("position", "absolute")
+        .style("left", "0px")
+        .style("top", "0px");
 
 
     function hover(event, elem) {
