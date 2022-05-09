@@ -50,6 +50,8 @@ of the top games, using data collected from one of the top board game listing/ra
 </style>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 
+<div id="linechart"></div>
+
 <script>
 let canvasWidth1 = 1200;
 let canvasHeight1 = 800;
@@ -58,7 +60,7 @@ let yMargin = 100;
 let width1 = canvasWidth1 - xMargin;
 let height1 = canvasHeight1 - yMargin;
 
-let svg1 = d3.select("body")
+let svg1 = d3.select("div#linechart")
     .append("svg")
     .attr("height", height1)
     .attr("width", width1);
@@ -86,7 +88,7 @@ svg1.append("text")
 let xScale1 = d3.scaleTime().range([xMargin, width1 - xMargin]);
 let yScale1 = d3.scaleLinear().range([height1 - yMargin * 2, 0]);
 
-let grid_container1 = svg.append("g");
+let grid_container1 = svg1.append("g");
 
 svg1.append("defs").append("clipPath")
     .attr("id", "clip")
