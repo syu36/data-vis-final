@@ -39,7 +39,7 @@
 </head>
 <body>
 <script>
-    let canvasWidth = 1300;
+    let canvasWidth = 1100;
     let canvasHeight = 800;
     let xMargin = 100;
     let yMargin = 100;
@@ -51,7 +51,7 @@
     let svg = d3.select("body")
         .append("svg")
         .attr("height", height)
-        .attr("width", width + xMargin);
+        .attr("width", width);
 
     // background
     svg.append("rect")
@@ -86,8 +86,6 @@
     // container for all of the points
     let container = svg.append("g")
         .attr("transform", "translate(" + xMargin + ", " + yMargin + ")");
-
-    let parseDate = d3.timeParse("%Y");
 
     // make sure we can read numbers properly
     let rowConverter = function(d) {
