@@ -1,6 +1,7 @@
-Board games have been around throughout history as a source of entertainment for friends and family.
-Today, there are hundreds of thousands of board games. These visualizations will provide some insights into some
-of the top games, using data collected from one of the top board game listing/rating websites, BoardGameGeek.
+##### Board games have been around throughout history as a source of entertainment for friends and family.
+##### Today, there are hundreds of thousands of board games. These visualizations will provide some insights into some
+##### of the top games, using data collected from one of the top board game listing/rating websites, BoardGameGeek.
+<hr>
 
 <style>
     .title {
@@ -58,6 +59,7 @@ Other games in ancient times include, but are not limited to Backgammon (~2000BC
 and Hounds and Jackals (~2000BC), also from Ancient Egypt.
 This chart shows a history of board game publication counts by year, and has some interesting facts along the timeline.
 Hover over a point to learn something!
+
 <script>
 let canvasWidth1 = 1200;
 let canvasHeight1 = 800;
@@ -274,6 +276,7 @@ One of the available functions of being a member of the BoardGameGeek community 
 Below is a chart showing the kind of board games people own, grouped by the minimum recommended age of those games. 
 Makes sense that most family games recommend children of ages 5+ for their games, and it seems interesting 
 that many strategy games and thematic games that people own tend to be for ages 12 and up.
+
 <script>
 let canvasWidth2 = 1200;
 let canvasHeight2 = 1200;
@@ -431,6 +434,7 @@ Is the difficulty of learning and playing a board game linked in any way to the 
 This chart seems to show a very slight trend in which complexity might have a positive effect on rating, but it's nothing conclusive. 
 Still, it's interesting to be able to filter through the mechanics of the games and check if there might be some correlation within 
 a single mechanic group. Hover over a point to see the name of the game as well as the year it was published.
+
 <script>
 let canvasWidth = 1200;
 let canvasHeight = 800;
