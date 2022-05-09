@@ -1,10 +1,6 @@
 Board games have been around throughout history as a source of entertainment for friends and family.
 Today, there are hundreds of thousands of board games. These visualizations will provide some insights into some
-of the top games, using data collected from one of the top board game listing/rating websites, Board Game Geek.
-
-[Line Chart](linechart.html)  
-[Scatterplot](scatterplot.html)  
-[Radar Chart](radar.html)
+of the top games, using data collected from one of the top board game listing/rating websites, BoardGameGeek.
 
 <style>
     .title {
@@ -19,7 +15,7 @@ of the top games, using data collected from one of the top board game listing/ra
         color: lightgray;
     }
 
-    .label {
+    .axis-label {
         font-size: 24px;
         font-family: "Trebuchet MS", sans-serif;
         text-anchor: middle;
@@ -55,6 +51,13 @@ of the top games, using data collected from one of the top board game listing/ra
 <div id="radar"></div>
 <div id="scatter"></div>
 
+Board games have been around and enjoyed for millenia.
+The very first board game was quite possibly a dice game from around 5000BC, found at the Başur Höyük burial mound in southeast Turkey.
+In Ancient Egypt, Senet (~3000BC) was popular amongst pharaohs.
+Other games in ancient times include, but are not limited to Backgammon (~2000BC) from Mesopotamia, Go (~2000BC) from China,
+and Hounds and Jackals (~2000BC), also from Ancient Egypt.
+This chart shows a history of board game publication counts by year, and has some interesting facts along the timeline.
+Hover over a point to learn something!
 <script>
 let canvasWidth1 = 1200;
 let canvasHeight1 = 800;
@@ -79,12 +82,12 @@ svg1.append("text")
     .text("Board Games Published Over Time");
 
 svg1.append("text")
-    .attr("class", "label")
+    .attr("class", "axis-label")
     .attr("transform", "translate(" + (width1 / 2) + ", " + (height1 - yMargin / 2) + ")")
     .text("Year");
 
 svg1.append("text")
-    .attr("class", "label")
+    .attr("class", "axis-label")
     .attr("transform", "translate(" + (xMargin / 2) + ", " + (height1 / 2) + ") rotate(270)")
     .text("# of Board Games");
 
@@ -264,6 +267,13 @@ counts.forEach(count => {
         .on("mouseout", mouseout)
 });
 </script>
+<hr>
+
+Board games fall under many domains, but the most common would have to be strategy and family games.
+One of the available functions of being a member of the BoardGameGeek community is to be able to report what games you own. 
+Below is a chart showing the kind of board games people own, grouped by the minimum recommended age of those games. 
+Makes sense that most family games recommend children of ages 5+ for their games, and it seems interesting 
+that many strategy games and thematic games that people own tend to be for ages 12 and up.
 <script>
 let canvasWidth2 = 1200;
 let canvasHeight2 = 1200;
@@ -415,6 +425,12 @@ d3.csv("bgg_data_domains.csv", rowConverter2).then(data => {
         .call(legendOrdinal);
 })
 </script>
+<hr>
+
+Is the difficulty of learning and playing a board game linked in any way to the overall rating of a board game? 
+This chart seems to show a very slight trend in which complexity might have a positive effect on rating, but it's nothing conclusive. 
+Still, it's interesting to be able to filter through the mechanics of the games and check if there might be some correlation within 
+a single mechanic group. Hover over a point to see the name of the game as well as the year it was published.
 <script>
 let canvasWidth = 1200;
 let canvasHeight = 800;
@@ -438,12 +454,12 @@ svg3.append("text")
     .text("Rating vs Complexity of Board Games");
 
 svg3.append("text")
-    .attr("class", "label")
+    .attr("class", "axis-label")
     .attr("transform", "translate(" + (width / 2) + ", " + (height - yMargin / 2) + ")")
     .text("Complexity Average");
 
 svg3.append("text")
-    .attr("class", "label")
+    .attr("class", "axis-label")
     .attr("transform", "translate(" + (xMargin / 2) + ", " + (height / 2) + ") rotate(270)")
     .text("Rating Average");
 
@@ -618,4 +634,4 @@ d3.csv("bgg_data_mechanics.csv", rowConverter3).then(data => {
 });
 </script>
 <select id="selectButton"></select>
-This is the end of the page.
+<hr>
