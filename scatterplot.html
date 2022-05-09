@@ -112,6 +112,8 @@
                 return data.find(d => d.name === id)
             })
 
+        console.log(initialData)
+
         xScale.domain(d3.extent(data, function(d) {
             return d.complexity;
         }));

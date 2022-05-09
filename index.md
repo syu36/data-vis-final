@@ -77,6 +77,11 @@ a single mechanic group. Hover over a point to see the name of the game as well 
 <select id="selectButton"></select>
 <hr>
 
+**Sources for facts**
+[1](https://en.wikipedia.org/wiki/Board_game)  
+[2](https://boardgamesland.com/the-complete-history-of-board-games/)  
+[3](https://diceygoblin.com/the-full-history-of-board-games/)  
+
 <script>
 let canvasWidth1 = 1200;
 let canvasHeight1 = 800;
