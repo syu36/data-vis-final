@@ -140,11 +140,11 @@ counts.forEach(count => {
 
     counts.pop();
 
-    xScale.domain(d3.extent(counts, function(d) {
+    xScale1.domain(d3.extent(counts, function(d) {
         return d[0];
     }));
 
-    yScale.domain([0, d3.max(counts, function(d) {
+    yScale1.domain([0, d3.max(counts, function(d) {
         return d[1];
     }) + 50]);
 
