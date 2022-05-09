@@ -217,8 +217,8 @@ counts.forEach(count => {
 
     function hover(event, elem) {
         let coords = d3.pointer(event);
-        tooltip.style("left", coords[0] + 10 + "px")
-            .style("top", coords[1] - 30 + "px")
+        tooltip.style("left", event.pageX + 10 + "px")
+            .style("top", event.pageY - 30 + "px")
             .style("opacity", 1)
             .html(elem.fact);
 

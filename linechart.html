@@ -117,7 +117,6 @@
         data = data.filter(data => data.year !== null)
         // get averages
         let counts = d3.rollups(data, v => d3.count(v, d => d.year), d => d.year);
-        console.log(counts)
         // sort array by year (asc)
         counts = counts.sort((a, b) => a[0] - b[0]);
 
@@ -125,13 +124,10 @@
         counts.forEach(count => {
             facts.forEach(fact => {
                 if (count[0].toString() === fact.year.toString()) {
-                    console.log(true)
                     fact.count = count[1]
                 }
             })
         })
-
-        console.log(facts)
 
         // year 0 is an outlier
         counts.shift()
@@ -223,6 +219,11 @@
 
 
         function hover(event, elem) {
+            let coords = d3.pointer(event)
+            let coords1 = d3.pointer(event, event.target)
+            console.log(coords)
+            console.log(coords)
+            console.log(event)
             tooltip.style("left", elem.x + 10 + "px")
                 .style("top", elem.y - 30 + "px")
                 .style("opacity", 1)
