@@ -53,7 +53,7 @@ of the top games, using data collected from one of the top board game listing/ra
 <div id="linechart"></div>
 
 <script>
-let canvasWidth1 = 1200;
+let canvasWidth1 = 1000;
 let canvasHeight1 = 800;
 let xMargin = 100;
 let yMargin = 100;
