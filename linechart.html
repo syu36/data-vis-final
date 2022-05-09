@@ -223,8 +223,8 @@
 
 
         function hover(event, elem) {
-            tooltip.style("left", event.x + 10 + "px")
-                .style("top", event.y - 30 + "px")
+            tooltip.style("left", elem.x + 10 + "px")
+                .style("top", elem.y - 30 + "px")
                 .style("opacity", 1)
                 .html(elem.fact)
 
