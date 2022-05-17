@@ -371,11 +371,11 @@ d3.csv("bgg_data_domains.csv", rowConverter2).then(data => {
     );
 
     ticks.forEach(t =>
-        svg2.append("text")
+        svg.append("text")
             .attr("class", "num-label")
-            .attr("x", width2 / 2 + 5)
-            .attr("y", width2 / 2 - radialScale(t))
-            .text(t.toString())
+            .attr("x", width / 2 + 5)
+            .attr("y", width / 2 - radialScale(t) - 5)
+            .text(String(t).replace(/(.)(?=(\d{3})+$)/g,'$1,'))
     );
 
     function angleToCoordinate(angle, value) {

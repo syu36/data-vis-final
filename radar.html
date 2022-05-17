@@ -120,8 +120,8 @@
             svg.append("text")
                 .attr("class", "num-label")
                 .attr("x", width / 2 + 5)
-                .attr("y", width / 2 - radialScale(t))
-                .text(t.toString())
+                .attr("y", width / 2 - radialScale(t) - 5)
+                .text(String(t).replace(/(.)(?=(\d{3})+$)/g,'$1,'))
         );
 
         function angleToCoordinate(angle, value) {
@@ -181,7 +181,7 @@
                 .attr("stroke", color)
                 .attr("fill", color)
                 .attr("stroke-opacity", 1)
-                .attr("opacity", 0.5)
+                .attr("opacity", 0.7)
         }
 
         svg.append("g")
