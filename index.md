@@ -371,7 +371,7 @@ d3.csv("bgg_data_domains.csv", rowConverter2).then(data => {
     );
 
     ticks.forEach(t =>
-        svg.append("text")
+        svg2.append("text")
             .attr("class", "num-label")
             .attr("x", width / 2 + 5)
             .attr("y", width / 2 - radialScale(t) - 5)
