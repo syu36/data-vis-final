@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/style.css" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js"></script>
+  </head>
+  <body>
+    <div class="header">
+      <h1>A Look Into Board Games</h1>
+      <h3>Stephen Yu</h3>
+    </div>
+    <div class="container">
+      <p>
+        Board games date back a very long time. The very first board game was
+        quite possibly a dice game from around 5000BC, found at the Başur Höyük
+        burial mound in southeast Turkey. In Ancient Egypt, Senet (~3000BC) was
+        popular amongst pharaohs. Other games in ancient times include, but are
+        not limited to Backgammon (~2000BC) from Mesopotamia, Go (~2000BC) from
+        China, and Hounds and Jackals (~2000BC), also from Ancient Egypt. This
+        chart shows a history of board game publication counts by year, and has
+        some interesting facts along the timeline. Hover over a point to learn
+        something!
+      </p>
+      <div class="chart" id="linechart"></div>
+      <p>
+        Board games can have a domain or even multiple, but the most common
+        would have to be strategy and family games. One of the available
+        functions of being a member of the BoardGameGeek community is to be able
+        to report what games you own. Below is a chart showing the kind of board
+        games people own, grouped by the minimum recommended age of those games.
+        Makes sense that most family games recommend children of ages 5+ for
+        their games, and it seems interesting that many strategy games and
+        thematic games that people own tend to be for ages 12 and up.
+      </p>
+      <div class="chart" id="radar"></div>
+      <p>
+        Is the difficulty of learning and playing a board game linked in any way
+        to the overall rating of a board game? This chart seems to show a very
+        slight trend in which complexity might have a positive effect on rating,
+        but it's nothing conclusive. Still, it's interesting to be able to
+        filter through the mechanics of the games and check if there might be
+        some correlation within a single mechanic group. Hover over a point to
+        see the name of the game as well as the year it was published.
+      </p>
+      <div class="chart" id="scatterplot">
+        <select id="selectButton"></select>
+      </div>
+      <div class="footer">
+        <h4>Sources</h4>
+        <ol>
+          <li>
+            <a href="https://en.wikipedia.org/wiki/Board_game"
+              >https://en.wikipedia.org/wiki/Board_game</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://boardgamesland.com/the-complete-history-of-board-games/"
+              >https://boardgamesland.com/the-complete-history-of-board-games/</a
+            >
+          </li>
+          <li>
+            <a href="https://diceygoblin.com/the-full-history-of-board-games/"
+              >https://diceygoblin.com/the-full-history-of-board-games/</a
+            >
+          </li>
+        </ol>
+      </div>
+    </div>
+  </body>
+  <script src="linechart.js"></script>
+  <script src="radar.js"></script>
+  <script src="scatterplot.js"></script>
+</html>

@@ -1,0 +1,51 @@
+html,
+body {
+  box-sizing: border-box;
+  margin: 0;
+  overflow-x: hidden;
+  vertical-align: middle;
+  background-color: lightblue;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+p {
+  align-self: center;
+  max-width: 1000px;
+}
+
+.container {
+  padding-top: 16px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  background-color: lightblue;
+}
+
+.chart {
+  margin: 16px 0;
+  align-self: center;
+}
+
+#scatterplot {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.header {
+  width: 100vw;
+  height: 150px;
+  background-color: lightblue;
+  border-bottom: 2px black solid;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
